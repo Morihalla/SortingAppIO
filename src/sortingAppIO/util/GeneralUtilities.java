@@ -20,9 +20,8 @@ public class GeneralUtilities {
     //Create summary-folder and -file
     static void createSummary(File[] files) {
         try {
-            Path path = Paths.get("D:\\Musique\\- sorted -\\summary.txt");
+            Path path = Paths.get("D:\\Musique\\summary.txt");
             if (Files.notExists(path)) {
-                Files.createDirectory(path.getParent());
                 Files.createFile(path);
             } else {
             List<String> header = new ArrayList<>();

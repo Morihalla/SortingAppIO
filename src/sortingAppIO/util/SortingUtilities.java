@@ -70,7 +70,7 @@ public class SortingUtilities extends GeneralUtilities {
     public static void writeSummary(File[] files) throws IOException {
 
         //Check and create summary if not present
-        Path path = Paths.get("D:\\Musique\\- sorted -\\summary.txt");
+        Path path = Paths.get("D:\\Musique\\summary.txt");
         if (Files.notExists(path)) {
             GeneralUtilities.createSummary(files);
             System.out.println("Summary created");
@@ -82,10 +82,11 @@ public class SortingUtilities extends GeneralUtilities {
                 //Write directory to summary
                 if (file.isDirectory()) {
 
-                    String emptyColumn = "\t".repeat(3) + "|"; //Empty column
                     List<String> dirName = new ArrayList<>();
-                    dirName.add(file.getName() + ":" + emptyColumn.repeat(2));
-                    dirName.add("-".repeat(file.getName().length() + 1) + emptyColumn.repeat(2));
+                    dirName.add("\n");
+                    dirName.add(file.getName() + ":");
+                    dirName.add("-".repeat(file.getName().length() + 1));
+                    dirName.add("\n");
                     Files.write(path, dirName, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
                     writeSummary(file.listFiles());
                 } else {

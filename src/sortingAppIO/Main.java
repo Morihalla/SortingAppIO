@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         //Make fileslist from chosen directory, iterate, and show directories and files
-        File[] files = new File("D:\\Musique\\0-9").listFiles();
+        File[] files = new File("D:\\Musique").listFiles();
         System.out.println("Files to sort ...");
         SortingUtilities.showFiles(files);
 
@@ -21,7 +21,7 @@ public class Main {
         GeneralUtilities.printDashedLine();
 
         //Make necessary directories
-        SortingUtilities.createDirectories(files);
+//        SortingUtilities.createDirectories(files);
 
         GeneralUtilities.printDashedLine();
 
