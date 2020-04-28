@@ -20,14 +20,14 @@ public class GeneralUtilities {
     //Create summary-folder and -file
     static void createSummary(File[] files) {
         try {
-            Path path = Paths.get("summary.txt");
-            Files.createFile(path.getParent());
+            Path path = Paths.get("D:\\Musique\\- sorted -\\summary.txt");
             if (Files.notExists(path)) {
+                Files.createDirectory(path.getParent());
                 Files.createFile(path);
-            }
+            } else {
             List<String> header = new ArrayList<>();
             header.add("name");
-            Files.write(path, header, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
+            Files.write(path, header, Charset.forName("UTF-8"), StandardOpenOption.APPEND);}
         } catch (IOException ioe) {
             ioe.getStackTrace();
         }

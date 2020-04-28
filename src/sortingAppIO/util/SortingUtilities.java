@@ -70,7 +70,7 @@ public class SortingUtilities extends GeneralUtilities {
     public static void writeSummary(File[] files) throws IOException {
 
         //Check and create summary if not present
-        Path path = Paths.get("summary.txt");
+        Path path = Paths.get("D:\\Musique\\- sorted -\\summary.txt");
         if (Files.notExists(path)) {
             GeneralUtilities.createSummary(files);
             System.out.println("Summary created");
