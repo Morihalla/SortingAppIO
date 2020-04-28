@@ -44,11 +44,14 @@ public class SortingUtilities extends GeneralUtilities {
     //Get Directory-names
     public static void createDirectories(File[] files) {
         for (File file : files) {
+
             //Check if it's another directory or a file
             if (file.isDirectory()) {
-                String name = file.getName().substring(0, 1);
+                String name = GeneralUtilities.getFirstLetter(file);
                 if (name.matches("[0-9]")) {
                     name = "0-9";
+                } else if (name.matches("-")) {
+                    name = "- Divers -";
                 }
 
                 //Create directory
@@ -100,4 +103,28 @@ public class SortingUtilities extends GeneralUtilities {
         }
     }
 
+    //Move files
+    public static void moveFiles(File[] files) {
+        for (File file : files) {
+            if (file.isDirectory()) {
+                try {
+                    if (file.isDirectory()) {
+                        String firstLetter = GeneralUtilities.getFirstLetter(file);
+                        if (firstLetter.matches("[0-9]")) {
+                            firstLetter = "0-9";
+                        } else if (firstLetter.matches("-")) {
+                            firstLetter = "- Divers -";
+                        }
+
+                        Path source = file.toPath();
+                        Path destination = Paths.get("D:\\Musique\\- sorted -\\" + firstLetter + "/" + file.getName());
+                        Files.move(source, destination);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
+

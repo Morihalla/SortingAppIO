@@ -10,23 +10,21 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         //Make fileslist from chosen directory, iterate, and show directories and files
-        File[] files = new File("D:\\Musique").listFiles();
+        File[] files = new File("D:\\Musique\\- Divers -").listFiles();
         System.out.println("Files to sort ...");
         SortingUtilities.showFiles(files);
 
-        GeneralUtilities.printDashedLine();
-
         SortingUtilities.createMainDirectory();
 
-        GeneralUtilities.printDashedLine();
-
         //Make necessary directories
-//        SortingUtilities.createDirectories(files);
+        SortingUtilities.createDirectories(files);
 
         GeneralUtilities.printDashedLine();
 
         //Create and write Summary
         SortingUtilities.writeSummary(files);
+
+        SortingUtilities.moveFiles(files);
 
     }
 }

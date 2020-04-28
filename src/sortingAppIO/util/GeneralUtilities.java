@@ -31,4 +31,9 @@ public class GeneralUtilities {
             ioe.getStackTrace();
         }
     }
+
+    //Get the first letter
+    static String getFirstLetter(File file) {
+        return file.getName().substring(0, 1);
+    }
 }
