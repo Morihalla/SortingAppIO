@@ -67,56 +67,36 @@ public class SortingUtilities extends GeneralUtilities {
 
 
     // Create and write summary
-    public static void writeSummary(File[] files, int FREESPACE) throws IOException {
+    public static void writeSummary(File[] files) throws IOException {
 
         //Check and create summary if not present
-        Path path = Paths.get("sorted_folder/summary/summary.txt");
+        Path path = Paths.get("summary.txt");
         if (Files.notExists(path)) {
             GeneralUtilities.createSummary(files);
             System.out.println("Summary created");
             GeneralUtilities.printDashedLine();
-            writeSummary(files, FREESPACE);
+            writeSummary(files);
         } else {
             for (File file : files) {
 
                 //Write directory to summary
                 if (file.isDirectory()) {
 
-                    //Print-out reusable strings
-                    String dirFreeSpace = " ".repeat(FREESPACE - file.getName().length() + 3) + "|"; // Calculate Directory-ouliner
                     String emptyColumn = "\t".repeat(3) + "|"; //Empty column
                     List<String> dirName = new ArrayList<>();
-                    dirName.add(" ".repeat(FREESPACE + 4) + "|" + emptyColumn.repeat(2));
-                    dirName.add(file.getName() + ":" + dirFreeSpace + emptyColumn.repeat(2));
-                    dirName.add("-".repeat(file.getName().length() + 1) + dirFreeSpace + emptyColumn.repeat(2));
+                    dirName.add(file.getName() + ":" + emptyColumn.repeat(2));
+                    dirName.add("-".repeat(file.getName().length() + 1) + emptyColumn.repeat(2));
                     Files.write(path, dirName, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
-                    writeSummary(file.listFiles(), FREESPACE);
+                    writeSummary(file.listFiles());
                 } else {
-
-                    //Print-out reusable strings
-                    String fileFreeSpace = " ".repeat(FREESPACE - file.getName().length()); // Calculate File-outliner
-                    String yes = "\t" + " ".repeat(4) + "x\t\t" + "|";
-                    String no = "\t" + " ".repeat(4) + "/\t\t" + "|";
 
                     //Write the file's info
                     List<String> fileName = new ArrayList<>();
+                    fileName.add(file.getName());
                     Files.write(path, fileName, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
                 }
             }
         }
     }
-
-//    static void clearEmptyDirs(File[] files) throws IOException {
-//        for (File file : files) {
-//            // check if folder file is a real folder
-//            if (file.isDirectory()) {
-//                clearEmptyDirs(file.listFiles());
-//            }
-//            //Remove empty folders
-//            Files.delete(Paths.get(String.valueOf(file)));
-//
-//            System.out.println(file.getName() + " was succesfully deleted.");
-//        }
-//    }
 
 }
