@@ -46,7 +46,7 @@ public class GeneralUtilities {
         int temp = 0;
         for (File file : files) {
             if (file.isDirectory()) {
-                for (File file1 : Objects.requireNonNull(file.listFiles())) {
+                for (File file1 : file.listFiles()) {
                     temp = (file1.getName().length()) - (file.getName().length() + 1);
                     i = Math.max(temp, i);
                 }
