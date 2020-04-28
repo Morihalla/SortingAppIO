@@ -28,60 +28,46 @@ public class SortingUtilities extends GeneralUtilities {
         }
     }
 
-
-    //Get extensions of files
-    static void createExtensionDirectories(File[] files) {
-        for (File file : files) {
-
-            //Check if it's another directory or a file
-            if (file.isDirectory()) {
-
-                //Reiterate inside the directory
-                createExtensionDirectories(file.listFiles());
-
+    //Create empty destination folder
+    public static void createMainDirectory() {
+        File file = new File("D:\\Musique\\- sorted -");
+        if (!file.exists()) {
+            //Check if directory is created.
+            if (file.mkdir()) {
+                System.out.println(file + " is created!");
             } else {
-                String extension = GeneralUtilities.getExtension(file);
-
-                //Create directory
-                    file = new File("sorted_folder/" + file.toString().indexOf(0));
-                    if (!file.exists()) {
-                        //Check if directory is created.
-                        if (file.mkdir()) {
-                            System.out.println(extension + "-directory is created!");
-                        } else {
-                            System.out.println("Failed to create directory!");
-                        }
-                    }
-                }
+                System.out.println("Failed to create directory!");
             }
         }
+    }
 
-    //Move files by extension
-    static void moveFiles(File[] files) {
+    //Get Directory-names
+    public static void createDirectories(File[] files) {
         for (File file : files) {
+            //Check if it's another directory or a file
             if (file.isDirectory()) {
-                moveFiles(file.listFiles());
-            } else {
-                try {
-                    if (file.isHidden()) {
-                        Path source = file.toPath();
-                        Path destination = Paths.get("sorted_folder/hidden/" + file.getName());
-                        Files.move(source, destination);
+                String name = file.getName().substring(0, 1);
+                if (name.matches("[0-9]")) {
+                    name = "0-9";
+                }
+
+                //Create directory
+                file = new File("D:\\Musique\\- sorted -\\" + name);
+                if (!file.exists()) {
+                    //Check if directory is created.
+                    if (file.mkdir()) {
+                        System.out.println(name + "-directory is created!");
                     } else {
-                        String extension = GeneralUtilities.getExtension(file);
-                        Path source = file.toPath();
-                        Path destination = Paths.get("sorted_folder/" + extension + "/" + file.getName());
-                        Files.move(source, destination);
+                        System.out.println("Failed to create directory!");
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }
     }
 
-    //Create and write summary
-    static void writeSummary(File[] files, int FREESPACE) throws IOException {
+
+    // Create and write summary
+    public static void writeSummary(File[] files, int FREESPACE) throws IOException {
 
         //Check and create summary if not present
         Path path = Paths.get("sorted_folder/summary/summary.txt");
@@ -120,17 +106,17 @@ public class SortingUtilities extends GeneralUtilities {
         }
     }
 
-    static void clearEmptyDirs(File[] files) throws IOException {
-        for (File file : files) {
-            // check if folder file is a real folder
-            if (file.isDirectory()) {
-                clearEmptyDirs(file.listFiles());
-            }
-            //Remove empty folders
-            Files.delete(Paths.get(String.valueOf(file)));
-
-            System.out.println(file.getName() + " was succesfully deleted.");
-        }
-    }
+//    static void clearEmptyDirs(File[] files) throws IOException {
+//        for (File file : files) {
+//            // check if folder file is a real folder
+//            if (file.isDirectory()) {
+//                clearEmptyDirs(file.listFiles());
+//            }
+//            //Remove empty folders
+//            Files.delete(Paths.get(String.valueOf(file)));
+//
+//            System.out.println(file.getName() + " was succesfully deleted.");
+//        }
+//    }
 
 }

@@ -19,7 +19,7 @@ public class GeneralUtilities {
     }
 
     //Print dashed line between outputs
-    static void printDashedLine() {
+    public static void printDashedLine() {
         System.out.println("-".repeat(100));
     }
 
