@@ -27,14 +27,14 @@ public class Main {
         SortingUtilities.createMainDirectory(pathWrite);
 
         //Make necessary directories
-        SortingUtilities.createDirectories(files);
+        SortingUtilities.createDirectories(files,pathWrite);
 
         GeneralUtilities.printDashedLine();
 
         //Create and write Summary
         SortingUtilities.writeSummary(files,pathWrite);
 
-        SortingUtilities.moveFiles(files);
+        SortingUtilities.moveFiles(files,pathWrite);
 
         kbd.close();
 

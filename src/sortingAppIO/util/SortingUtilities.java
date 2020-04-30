@@ -42,7 +42,7 @@ public class SortingUtilities extends GeneralUtilities {
     }
 
     //Get Directory-names
-    public static void createDirectories(File[] files) {
+    public static void createDirectories(File[] files, String pathWrite) {
         for (File file : files) {
 
             //Check if it's another directory or a file
@@ -55,7 +55,7 @@ public class SortingUtilities extends GeneralUtilities {
                 }
 
                 //Create directory
-                file = new File("D:\\Musique\\" + name);
+                file = new File(pathWrite + "/" + name);
                 if (!file.exists()) {
                     //Check if directory is created.
                     if (file.mkdir()) {
@@ -104,7 +104,7 @@ public class SortingUtilities extends GeneralUtilities {
     }
 
     //Move files
-    public static void moveFiles(File[] files) {
+    public static void moveFiles(File[] files,String pathWrite) {
         for (File file : files) {
             if (file.isDirectory()) {
                 try {
@@ -117,7 +117,7 @@ public class SortingUtilities extends GeneralUtilities {
                         }
 
                         Path source = file.toPath();
-                        Path destination = Paths.get("D:\\Musique\\" + firstLetter + "/" + file.getName());
+                        Path destination = Paths.get(pathWrite + "/" + firstLetter + "/" + file.getName());
                         Files.move(source, destination);
                     }
                 } catch (IOException e) {
