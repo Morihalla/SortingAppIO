@@ -29,8 +29,8 @@ public class SortingUtilities extends GeneralUtilities {
     }
 
     //Create empty destination folder
-    public static void createMainDirectory() {
-        File file = new File("D:\\Musique\\- sorted -");
+    public static void createMainDirectory(String pathName) {
+        File file = new File(pathName);
         if (!file.exists()) {
             //Check if directory is created.
             if (file.mkdir()) {
@@ -55,7 +55,7 @@ public class SortingUtilities extends GeneralUtilities {
                 }
 
                 //Create directory
-                file = new File("D:\\Musique\\- sorted -\\" + name);
+                file = new File("D:\\Musique\\" + name);
                 if (!file.exists()) {
                     //Check if directory is created.
                     if (file.mkdir()) {
@@ -70,15 +70,15 @@ public class SortingUtilities extends GeneralUtilities {
 
 
     // Create and write summary
-    public static void writeSummary(File[] files) throws IOException {
+    public static void writeSummary(File[] files, String pathTo) throws IOException {
 
         //Check and create summary if not present
-        Path path = Paths.get("D:\\Musique\\summary.txt");
+        Path path = Paths.get(pathTo+ "/" + "summary.txt");
         if (Files.notExists(path)) {
             GeneralUtilities.createSummary(files);
             System.out.println("Summary created");
             GeneralUtilities.printDashedLine();
-            writeSummary(files);
+            writeSummary(files,pathTo);
         } else {
             for (File file : files) {
 
@@ -91,7 +91,7 @@ public class SortingUtilities extends GeneralUtilities {
                     dirName.add("-".repeat(file.getName().length() + 1));
                     dirName.add("\n");
                     Files.write(path, dirName, Charset.forName("UTF-8"), StandardOpenOption.APPEND);
-                    writeSummary(file.listFiles());
+                    writeSummary(file.listFiles(),pathTo);
                 } else {
 
                     //Write the file's info
@@ -117,7 +117,7 @@ public class SortingUtilities extends GeneralUtilities {
                         }
 
                         Path source = file.toPath();
-                        Path destination = Paths.get("D:\\Musique\\- sorted -\\" + firstLetter + "/" + file.getName());
+                        Path destination = Paths.get("D:\\Musique\\" + firstLetter + "/" + file.getName());
                         Files.move(source, destination);
                     }
                 } catch (IOException e) {
