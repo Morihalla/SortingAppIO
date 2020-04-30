@@ -18,9 +18,9 @@ public class GeneralUtilities {
     }
 
     //Create summary-folder and -file
-    static void createSummary(File[] files) {
+    static void createSummary(File[] files, String pathTo) {
         try {
-            Path path = Paths.get("D:\\Musique\\summary.txt");
+            Path path = Paths.get(pathTo + "/" + "summary.txt");
             if (Files.notExists(path)) {
                 Files.createFile(path);
             } else {

@@ -24,17 +24,17 @@ public class Main {
         System.out.println("Where do I put the summary and sorted files? ->");
         String pathWrite = kbd.nextLine();
 
-        SortingUtilities.createMainDirectory(pathWrite);
+//        SortingUtilities.createMainDirectory(pathWrite);
 
         //Make necessary directories
-        SortingUtilities.createDirectories(files,pathWrite);
+//        SortingUtilities.createDirectories(files,pathWrite);
 
         GeneralUtilities.printDashedLine();
 
         //Create and write Summary
         SortingUtilities.writeSummary(files,pathWrite);
 
-        SortingUtilities.moveFiles(files,pathWrite);
+//        SortingUtilities.moveFiles(files,pathWrite);
 
         kbd.close();
 
